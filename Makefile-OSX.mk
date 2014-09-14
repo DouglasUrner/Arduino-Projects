@@ -3,9 +3,13 @@
 ### For detailled explanations about all the avalaible options,
 ### please refer to https://github.com/sudar/Arduino-Makefile/blob/master/arduino-mk-vars.md
 
+### BASE_DIR
+### This is the path to where the Bare-Arduino-Project repository was cloned
+BASE_DIR	= /Users/dlu/Source/Arduino-Projects
+
 ### PROJECT_DIR
 ### This is the path to where you have created/cloned your project
-PROJECT_DIR       = /Users/{{ YOUR USERNAME }}/path/to/MyAwesomeProject
+PROJECT_DIR       = $(BASE_DIR)/src/name-of-the-folder-holding-your-project
 
 ### AVR_GCC_VERSION
 ### Check if the version is equal or higher than 4.9
@@ -13,19 +17,19 @@ AVR_GCC_VERSION  := $(shell expr `avr-gcc -dumpversion | cut -f1` \>= 4.9)
 
 ### ARDMK_DIR
 ### Path to the Arduino-Makefile directory.
-ARDMK_DIR         = $(PROJECT_DIR)/Arduino-Makefile
+ARDMK_DIR         = $(BASE_DIR)/Arduino-Makefile
 
 ### ARDUINO_DIR
 ### Path to the Arduino application and ressources directory.
-ARDUINO_DIR       = /Applications/Arduino.app/Contents/Resources/Java
+ARDUINO_DIR       = /Applications/Arduino-1.0.5.app/Contents/Resources/Java
 
 ### USER_LIB_PATH
 ### Path to where the your project's libraries are stored.
-USER_LIB_PATH     :=  $(PROJECT_DIR)/lib
+USER_LIB_PATH     :=  $(BASE_DIR)/lib
 
 ### BOARD_TAG
 ### It must be set to the board you are currently using. (i.e uno, mega2560, etc.)
-BOARD_TAG         = mega2560
+BOARD_TAG         = uno
 
 ### MONITOR_BAUDRATE
 ### It must be set to Serial baudrate value you are using.
@@ -63,7 +67,7 @@ CURRENT_DIR       = $(shell basename $(CURDIR))
 
 ### OBJDIR
 ### This is were you put the binaries you just compile using 'make'
-OBJDIR            = $(PROJECT_DIR)/bin/$(BOARD_TAG)/$(CURRENT_DIR)
+OBJDIR            = $(BASE_DIR)/bin/$(BOARD_TAG)/$(CURRENT_DIR)
 
 ### path to Arduino.mk, inside the ARDMK_DIR, don't touch.
 include $(ARDMK_DIR)/Arduino.mk
